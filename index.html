@@ -115,9 +115,9 @@ img{display:block;width:100%;object-fit:cover;}
 
 /* ── TICKER ── */
 .ticker { background: #F4F9FA; padding: 13px 0; overflow: hidden; border-top: 0.5px solid #E0EDEF; border-bottom: 0.5px solid #E0EDEF; }
-.ticker-track { display: flex; animation: tick 28s linear infinite; white-space: nowrap; }
-.ticker-item { font-size: 11px; font-weight: 400; letter-spacing: 0.09em; color: #2C3A3B; padding: 0 20px; }
-.ticker-star { color: #7DD4DC; margin: 0 0px; }
+.ticker-track { display: flex; width: max-content; animation: tick 28s linear infinite; white-space: nowrap; }
+.ticker-item { font-size: 11px; font-weight: 400; letter-spacing: 0.09em; color: #2C3A3B; padding: 0 20px; display: inline-block; }
+.ticker-star { color: #7DD4DC; }
 @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ── SECTION SHELL ── */
