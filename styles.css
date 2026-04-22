@@ -521,7 +521,6 @@ a {
   border-color: var(--sky);
   color: var(--ocean);
 }
-.topic-icon { font-size: 14px; }
 
 /* 3-column article grid */
 .articles-grid {
