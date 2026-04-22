@@ -94,6 +94,20 @@ img{display:block;width:100%;object-fit:cover;}
 .hc4 .hcard-title{color:var(--ink);}
 .hc4 .hcard-pill{background:var(--ocean);color:white;}
 
+  .hcard {
+  animation: float 5s ease-in-out infinite;
+}
+.hcard:nth-child(2) { animation-delay: -1.5s; }
+.hcard:nth-child(3) { animation-delay: -3s; }
+.hcard:nth-child(4) { animation-delay: -4.5s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+  .hcard:nth-child(2) { animation-delay: -1.5s; margin-top: 24px; }
+.hcard:nth-child(4) { animation-delay: -4.5s; margin-top: 24px; }
+
 /* ── TICKER ── */
 .ticker { background: #F4F9FA; padding: 13px 0; overflow: hidden; border-top: 0.5px solid #E0EDEF; border-bottom: 0.5px solid #E0EDEF; }
 .ticker-track { display: flex; animation: tick 28s linear infinite; white-space: nowrap; }
