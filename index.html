@@ -9,9 +9,1072 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
- 
-  <!-- All visual styles live in styles.css -->
-  <link rel="stylesheet" href="styles.css">
+  
+<style> 
+  /* ============================================================
+   virey. — curated discoveries for a better life
+   styles.css — all visual styles for the website
+   ============================================================ */
+
+
+/* ── DESIGN TOKENS ──────────────────────────────────────────
+   Global colour palette and shared variables.
+   Change these to retheme the entire site at once.
+   ---------------------------------------------------------- */
+:root {
+  --white:    #FFFFFF;
+  --ice:      #F4F9FA;      /* very light celeste — used for card backgrounds */
+  --celeste:  #CCF0F4;      /* primary brand colour — celeste */
+  --sky:      #7DD4DC;      /* mid celeste — accents, stars, highlights */
+  --ocean:    #3BAAB5;      /* deep celeste — buttons, links, CTAs */
+  --mist:     #E0F5F7;      /* lightest celeste wash — hover states */
+  --slate:    #5A5F60;      /* body text colour */
+  --ink:      #2C3A3B;      /* headings and dark sections background */
+  --border:   #E0EDEF;      /* default card/section border */
+  --border2:  #C8E8EC;      /* celeste-tinted border for focus states */
+}
+
+
+/* ── RESET & BASE ───────────────────────────────────────────
+   Normalise browser defaults and set global body styles.
+   ---------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* ── LAYOUT UTILITY ─────────────────────────────────────────
+   Centred max-width container used across all sections.
+   ---------------------------------------------------------- */
+.container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+
+/* ── NAVIGATION ─────────────────────────────────────────────
+   Fixed top bar with logo, topic filters, and subscribe CTA.
+   Uses backdrop-filter for frosted glass effect on scroll.
+   ---------------------------------------------------------- */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 0.5px solid var(--border);
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Brand name in the nav */
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.nav-logo span {
+  color: var(--ocean); /* the dot after virey */
+}
+
+/* Topic pill filters (All, Move, Eat, Glow, Explore, Grow) */
+.nav-topics {
+  display: flex;
+  gap: 6px;
+}
+
+.nav-topic {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--slate);
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 0.5px solid transparent;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.nav-topic:hover,
+.nav-topic.active {
+  background: var(--mist);
+  color: var(--ocean);
+  border-color: var(--border2);
+}
+
+/* Right side: shop icon link + subscribe button */
+.nav-right {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.nav-shop {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--slate);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.2s;
+}
+.nav-shop:hover { color: var(--ocean); }
+
+.nav-subscribe {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: var(--ocean);
+  color: white;
+  transition: all 0.2s;
+}
+.nav-subscribe:hover { background: var(--ink); }
+
+
+/* ── HERO SECTION ───────────────────────────────────────────
+   Full-height opening section with headline on the left
+   and four floating content preview cards on the right.
+   ---------------------------------------------------------- */
+.hero {
+  padding: 120px 0 80px;
+  position: relative;
+  overflow: hidden;
+  background: var(--white);
+}
+
+/* Decorative blurred colour blobs in the background */
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none; /* blobs must never block clicks */
+}
+.blob1 {
+  width: 600px; height: 600px;
+  background: var(--celeste);
+  opacity: 0.35;
+  top: -150px; right: -100px;
+}
+.blob2 {
+  width: 350px; height: 350px;
+  background: var(--mist);
+  opacity: 0.5;
+  bottom: -80px; left: -80px;
+}
+
+/* Two-column grid: text left, cards right */
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Small uppercase label above the headline */
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.hero-eyebrow::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--ocean);
+}
+.hero-eyebrow-text {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ocean);
+}
+
+/* Main headline */
+.hero-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(44px, 5.5vw, 70px);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  margin-bottom: 22px;
+}
+.hero-h1 em {
+  font-style: italic;
+  color: var(--ocean);
+}
+
+/* Subtitle paragraph */
+.hero-p {
+  font-size: 16px;
+  line-height: 1.78;
+  color: var(--slate);
+  font-weight: 300;
+  margin-bottom: 34px;
+  max-width: 480px;
+}
+
+/* CTA buttons row */
+.hero-ctas {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Shared button base style */
+.btn {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding: 13px 26px;
+  border-radius: 999px;
+  transition: all 0.2s;
+}
+.btn-fill { background: var(--ocean); color: white; }
+.btn-fill:hover { background: var(--ink); transform: translateY(-2px); }
+.btn-outline { border: 1.5px solid var(--border2); color: var(--ocean); background: transparent; }
+.btn-outline:hover { background: var(--mist); }
+
+
+/* ── HERO CARDS (right side) ────────────────────────────────
+   2×2 grid of mini content preview cards that float
+   up and down with a staggered animation.
+   ---------------------------------------------------------- */
+.hero-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  transform: rotate(1deg); /* slight tilt for visual interest */
+}
+
+/* Each card floats independently */
+.hcard {
+  border-radius: 18px;
+  padding: 22px;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  animation: float 5s ease-in-out infinite;
+}
+/* Stagger the float timing so cards move at different speeds */
+.hcard:nth-child(2) { animation-delay: -1.5s; margin-top: 22px; }
+.hcard:nth-child(3) { animation-delay: -3s; }
+.hcard:nth-child(4) { animation-delay: -4.5s; margin-top: 22px; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* Card inner elements */
+.hcard-tag   { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 8px; }
+.hcard-title { font-family: 'Playfair Display', serif; font-size: 13px; line-height: 1.35; margin-bottom: 6px; }
+.hcard-body  { font-size: 10px; line-height: 1.5; opacity: 0.65; }
+.hcard-pill  { display: inline-block; font-size: 8px; font-weight: 600; letter-spacing: 0.04em; padding: 3px 10px; border-radius: 999px; margin-top: 9px; }
+
+/* Card colour variants */
+.hc1 { background: white; border: 0.5px solid var(--border); }
+.hc1 .hcard-tag  { color: var(--ocean); }
+.hc1 .hcard-title { color: var(--ink); }
+.hc1 .hcard-pill { background: var(--celeste); color: var(--ocean); }
+
+.hc2 { background: var(--ocean); }
+.hc2 .hcard-tag              { color: var(--celeste); }
+.hc2 .hcard-title, .hc2 .hcard-body { color: white; }
+.hc2 .hcard-pill             { background: white; color: var(--ocean); }
+
+.hc3 { background: var(--ice); border: 0.5px solid var(--border2); }
+.hc3 .hcard-tag  { color: var(--ocean); }
+.hc3 .hcard-title { color: var(--ink); }
+.hc3 .hcard-pill { background: var(--sky); color: white; }
+
+.hc4 { background: var(--celeste); }
+.hc4 .hcard-tag  { color: var(--ocean); }
+.hc4 .hcard-title { color: var(--ink); }
+.hc4 .hcard-pill { background: var(--ocean); color: white; }
+
+
+/* ── TICKER / MARQUEE STRIP ─────────────────────────────────
+   Continuously scrolling topic tags between hero and content.
+   Items are duplicated in HTML to create a seamless loop.
+   ---------------------------------------------------------- */
+.ticker {
+  background: #F4F9FA;
+  padding: 13px 0;
+  overflow: hidden;
+  border-top: 0.5px solid #E0EDEF;
+  border-bottom: 0.5px solid #E0EDEF;
+}
+
+/* The track moves left at a constant speed */
+.ticker-track {
+  display: flex;
+  width: max-content;             /* must be wider than the viewport */
+  animation: tick 5s linear infinite;
+  white-space: nowrap;
+}
+
+/* translateX(-50%) works because the HTML has exactly 2× the items */
+@keyframes tick {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.ticker-item {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.09em;
+  color: #2C3A3B;
+  padding: 0 20px;
+  display: inline-block;
+}
+.ticker-star { color: #7DD4DC; } /* celeste star separator ✦ */
+
+
+/* ── SHARED SECTION STYLES ──────────────────────────────────
+   Reusable layout, heading, and eyebrow styles used by
+   featured, topics, shop, newsletter, and about sections.
+   ---------------------------------------------------------- */
+.section      { padding: 88px 0; }
+.section-alt  { background: var(--ice); }   /* alternating background */
+.section-head { margin-bottom: 52px; }
+
+/* Small uppercase eyebrow label above section headings */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.eyebrow::before {
+  content: '';
+  width: 18px; height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+.eyebrow-text {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.eye-ocean { color: var(--ocean); }
+.eye-sky   { color: var(--sky); }
+
+/* Section heading (h2) */
+.sh2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.sh2 em { font-style: italic; color: var(--ocean); }
+
+/* Section subtitle paragraph */
+.sp { font-size: 15px; line-height: 1.75; color: var(--slate); font-weight: 300; }
+
+/* Split heading/subtitle layout (heading left, paragraph right) */
+.section-head-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: end;
+}
+
+
+/* ── FEATURED ARTICLES SECTION ──────────────────────────────
+   "What virey is reading right now" — one hero article left,
+   three smaller article cards stacked on the right.
+   ---------------------------------------------------------- */
+
+/* Hero article takes 60%, side stack takes 40% */
+.featured-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 20px;
+}
+
+/* Large clickable article card with gradient image background */
+.article-hero {
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--ink);
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px;
+  cursor: pointer;
+}
+/* Dark overlay so text is readable over the gradient */
+.article-hero-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(20,30,31,0.92) 0%, rgba(20,30,31,0.3) 60%, transparent 100%);
+}
+/* Colour gradient representing each topic */
+.article-hero-img          { position: absolute; inset: 0; }
+.article-hero-img.move    { background: linear-gradient(135deg, #1A6B78, #3BAAB5); }
+.article-hero-img.eat     { background: linear-gradient(135deg, #2E6B3E, #5BB8C4); }
+.article-hero-img.glow    { background: linear-gradient(135deg, #3BAAB5, #7DD4DC); }
+.article-hero-img.grow    { background: linear-gradient(135deg, #1A5060, #3BAAB5); }
+.article-hero-img.explore { background: linear-gradient(135deg, #0D4A55, #5BB8C4); }
+
+.article-hero-content { position: relative; z-index: 1; }
+.article-hero .art-tag   { color: var(--sky); margin-bottom: 10px; }
+.article-hero .art-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 2.5vw, 30px);
+  font-weight: 500;
+  color: white;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.article-hero .art-desc { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.6; margin-bottom: 16px; }
+.article-hero .art-meta { font-size: 11px; color: rgba(255,255,255,0.4); display: flex; gap: 16px; }
+
+/* The three smaller article cards on the right */
+.articles-side { display: flex; flex-direction: column; gap: 14px; }
+
+.article-card {
+  background: white;
+  border: 0.5px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.22s;
+  display: flex;
+  flex-direction: column;
+}
+.article-card:hover { border-color: var(--sky); transform: translateY(-3px); }
+
+/* Gradient image strip at the top of each small card */
+.article-card-img { height: 120px; }
+.article-card-img.move    { background: linear-gradient(135deg, #1A6B78, #3BAAB5); }
+.article-card-img.eat     { background: linear-gradient(135deg, #2E6B3E, #5BB8C4); }
+.article-card-img.glow    { background: linear-gradient(135deg, #3BAAB5, #7DD4DC); }
+.article-card-img.grow    { background: linear-gradient(135deg, #1A5060, #3BAAB5); }
+.article-card-img.explore { background: linear-gradient(135deg, #0D4A55, #5BB8C4); }
+
+.article-card-body { padding: 18px; flex: 1; }
+
+/* Shared article text styles (used in side cards and article grid) */
+.art-tag      { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ocean); margin-bottom: 7px; }
+.art-title-sm { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 500; color: var(--ink); line-height: 1.3; margin-bottom: 6px; }
+.art-desc-sm  { font-size: 12px; color: var(--slate); line-height: 1.55; }
+.art-meta-sm  { font-size: 10px; color: var(--sky); margin-top: 10px; font-weight: 500; }
+
+
+/* ── TOPICS / BROWSE BY SECTION ─────────────────────────────
+   Filter buttons + responsive 3-column article card grid.
+   Clicking a filter button shows/hides cards by data-topic.
+   ---------------------------------------------------------- */
+
+/* Row of filter buttons above the article grid */
+.topics-nav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.topic-btn {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 9px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--slate);
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.topic-btn:hover,
+.topic-btn.active {
+  background: var(--celeste);
+  border-color: var(--sky);
+  color: var(--ocean);
+}
+
+/* 3-column article grid */
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Individual article card in the grid */
+.ag-card {
+  background: white;
+  border: 0.5px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.22s;
+}
+.ag-card:hover { border-color: var(--sky); transform: translateY(-3px); }
+
+/* Gradient image at top of each card */
+.ag-img { height: 160px; }
+.ag-img.move    { background: linear-gradient(135deg, #1A6B78, #3BAAB5); }
+.ag-img.eat     { background: linear-gradient(135deg, #2E6B3E, #5BB8C4); }
+.ag-img.glow    { background: linear-gradient(135deg, #3BAAB5, #7DD4DC); }
+.ag-img.grow    { background: linear-gradient(135deg, #1A5060, #3BAAB5); }
+.ag-img.explore { background: linear-gradient(135deg, #0D4A55, #5BB8C4); }
+
+.ag-body  { padding: 20px; }
+.ag-tag   { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ocean); margin-bottom: 8px; }
+.ag-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 500; color: var(--ink); line-height: 1.3; margin-bottom: 8px; }
+.ag-desc  { font-size: 12px; color: var(--slate); line-height: 1.6; }
+
+.ag-meta  { margin-top: 14px; display: flex; align-items: center; justify-content: space-between; }
+.ag-date  { font-size: 10px; color: var(--sky); }
+.ag-read  { font-size: 10px; font-weight: 500; color: var(--ocean); }
+
+/* "Load more articles" button below the grid */
+.load-more {
+  display: block;
+  margin: 40px auto 0;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 13px 32px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border2);
+  color: var(--ocean);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.load-more:hover { background: var(--mist); }
+
+
+/* ── SHOP / STOREFRONT SECTION ──────────────────────────────
+   Digital guides for sale + affiliate brand links.
+   Connects to Gumroad or Stan Store via the openShop() JS fn.
+   ---------------------------------------------------------- */
+
+/* Two-column intro: heading left, description right */
+.shop-intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: end;
+  margin-bottom: 52px;
+}
+
+/* 3-column product card grid */
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.shop-card {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 0.5px solid var(--border);
+  background: white;
+  cursor: pointer;
+  transition: all 0.22s;
+}
+.shop-card:hover { border-color: var(--sky); transform: translateY(-4px); }
+
+/* Gradient image at top of each product card */
+.shop-img {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.shop-img.s1 { background: linear-gradient(135deg, var(--celeste), var(--sky)); }
+.shop-img.s2 { background: linear-gradient(135deg, var(--ice), var(--celeste)); }
+.shop-img.s3 { background: linear-gradient(135deg, var(--mist), var(--sky)); }
+.shop-img.s4 { background: linear-gradient(135deg, var(--sky), var(--ocean)); }
+.shop-img.s5 { background: linear-gradient(135deg, var(--celeste), var(--ocean)); }
+.shop-img.s6 { background: linear-gradient(135deg, var(--ice), var(--sky)); }
+
+.shop-img-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 500;
+  color: white;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.15);
+}
+.shop-img-icon {
+  font-size: 40px;
+  position: absolute;
+  bottom: 16px; right: 20px;
+  opacity: 0.6;
+}
+
+.shop-body     { padding: 22px; }
+.shop-category { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ocean); margin-bottom: 8px; }
+.shop-name     { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 500; color: var(--ink); line-height: 1.25; margin-bottom: 8px; }
+.shop-desc     { font-size: 12px; color: var(--slate); line-height: 1.6; margin-bottom: 16px; }
+
+.shop-footer { display: flex; align-items: center; justify-content: space-between; }
+.shop-price  { font-size: 16px; font-weight: 500; color: var(--ocean); }
+.shop-btn    { font-size: 11px; font-weight: 600; padding: 8px 18px; border-radius: 999px; background: var(--ocean); color: white; transition: all 0.2s; }
+.shop-btn:hover { background: var(--ink); }
+
+/* Affiliate brands strip below the product grid */
+.shop-affiliate {
+  margin-top: 40px;
+  padding: 28px 32px;
+  background: var(--ice);
+  border: 0.5px solid var(--border);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.shop-aff-text  { flex: 1; min-width: 240px; }
+.shop-aff-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ocean); margin-bottom: 6px; }
+.shop-aff-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
+.shop-aff-desc  { font-size: 13px; color: var(--slate); line-height: 1.6; }
+
+.aff-brands { display: flex; gap: 10px; flex-wrap: wrap; }
+.aff-brand  {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border2);
+  color: var(--ocean);
+  background: white;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.aff-brand:hover { background: var(--celeste); }
+
+
+/* ── NEWSLETTER SECTION ─────────────────────────────────────
+   Dark background section with left column description
+   and right column email signup form.
+   ---------------------------------------------------------- */
+.newsletter { background: var(--ink); padding: 88px 0; }
+
+/* Two-column grid: info left, form right */
+.nl-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* Left column — eyebrow uses sky colour on dark background */
+.nl-left .eyebrow-text  { color: var(--sky); }
+.nl-left .eyebrow::before { background: var(--sky); }
+
+.nl-h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 3.5vw, 44px);
+  font-weight: 500;
+  color: white;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.nl-h2 em { font-style: italic; color: var(--sky); }
+
+.nl-p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.75; font-weight: 300; margin-bottom: 28px; }
+
+/* Benefit bullets below the description */
+.nl-perks  { display: flex; flex-direction: column; gap: 10px; }
+.nl-perk   { display: flex; align-items: center; gap: 12px; font-size: 13px; color: rgba(255,255,255,0.65); }
+.nl-perk-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sky); flex-shrink: 0; }
+
+/* Last issue teaser box */
+.nl-preview    { margin-top: 28px; background: rgba(255,255,255,0.04); border: 0.5px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 20px; }
+.nl-prev-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sky); margin-bottom: 12px; }
+.nl-prev-issue { font-family: 'Playfair Display', serif; font-size: 15px; color: rgba(255,255,255,0.8); line-height: 1.4; margin-bottom: 8px; }
+.nl-prev-meta  { font-size: 11px; color: rgba(255,255,255,0.3); }
+
+/* Right column — frosted glass signup form */
+.nl-form-card {
+  background: rgba(255,255,255,0.05);
+  border: 0.5px solid rgba(125,212,220,0.2);
+  border-radius: 20px;
+  padding: 36px;
+}
+.nl-form-label { font-size: 14px; font-weight: 500; color: white; margin-bottom: 20px; }
+
+.nl-input {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(125,212,220,0.25);
+  background: rgba(255,255,255,0.07);
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  margin-bottom: 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.nl-input::placeholder { color: rgba(255,255,255,0.3); }
+.nl-input:focus        { border-color: var(--sky); }
+
+.nl-submit {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  background: var(--ocean);
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.nl-submit:hover { background: var(--sky); }
+
+.nl-small { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 12px; text-align: center; }
+
+
+/* ── ABOUT SECTION ──────────────────────────────────────────
+   Two-column layout: decorative virey monogram left,
+   brand description and social links right.
+   ---------------------------------------------------------- */
+.about-strip { background: var(--white); padding: 72px 0; }
+
+.about-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* Left: decorative box with large "v." monogram */
+.about-img-area {
+  background: var(--ice);
+  border: 0.5px solid var(--border);
+  border-radius: 24px;
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.about-img-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--celeste) 0%, var(--sky) 100%);
+  opacity: 0.25;
+}
+.about-monogram {
+  font-family: 'Playfair Display', serif;
+  font-size: 120px;
+  font-weight: 400;
+  color: var(--sky);
+  opacity: 0.4;
+  line-height: 1;
+  user-select: none;
+}
+.about-tagline {
+  position: absolute;
+  bottom: 24px; left: 24px; right: 24px;
+  font-size: 13px;
+  color: var(--ocean);
+  font-style: italic;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Right: about text and platform pills */
+.about-h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+.about-h2 em { font-style: italic; color: var(--ocean); }
+.about-p { font-size: 14px; line-height: 1.8; color: var(--slate); font-weight: 300; margin-bottom: 14px; }
+
+/* Social/platform pill links */
+.about-platforms { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+.plat-pill {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--slate);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+.plat-pill:hover { border-color: var(--sky); color: var(--ocean); background: var(--mist); }
+
+
+/* ── FOOTER ─────────────────────────────────────────────────
+   Dark background footer with brand description, topic links,
+   shop links, virey links, and legal row at the bottom.
+   ---------------------------------------------------------- */
+footer { background: var(--ink); padding: 52px 0 28px; }
+
+/* 4-column top section: brand + 3 link columns */
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-brand-name { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 500; color: white; margin-bottom: 10px; }
+.footer-brand-name span { color: var(--sky); }
+
+.footer-brand-desc { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.7; font-weight: 300; max-width: 260px; margin-bottom: 20px; }
+
+/* Social icon circles */
+.footer-socials { display: flex; gap: 10px; }
+.fsoc {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 0.5px solid rgba(255,255,255,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  color: rgba(255,255,255,0.45);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.fsoc:hover { border-color: var(--sky); color: var(--sky); }
+
+/* Column headings */
+.footer-col-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 16px;
+}
+
+/* Column link lists */
+.footer-links   { display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 13px; color: rgba(255,255,255,0.45); transition: color 0.2s; }
+.footer-links a:hover { color: var(--sky); }
+
+/* Bottom bar with copyright and legal links */
+.footer-bottom {
+  border-top: 0.5px solid rgba(255,255,255,0.07);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+.footer-legal { display: flex; gap: 20px; }
+.footer-legal a { font-size: 11px; color: rgba(255,255,255,0.25); transition: color 0.2s; }
+.footer-legal a:hover { color: var(--sky); }
+
+
+/* ── ARTICLE MODAL ──────────────────────────────────────────
+   Full-screen overlay that slides in when an article card
+   is clicked. Contains article header, body, and affiliate CTA.
+   Closed by clicking outside, clicking ✕, or pressing Escape.
+   ---------------------------------------------------------- */
+
+/* Dark semi-transparent overlay */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(20,30,31,0.7);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  backdrop-filter: blur(6px);
+}
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* The modal card itself */
+.modal {
+  background: white;
+  border-radius: 24px;
+  max-width: 680px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  transform: translateY(20px);
+  transition: transform 0.3s;
+}
+.modal-overlay.open .modal { transform: translateY(0); }
+
+/* Coloured header image area */
+.modal-header {
+  height: 220px;
+  border-radius: 24px 24px 0 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 28px;
+  position: relative;
+}
+.modal-header-bg      { position: absolute; inset: 0; border-radius: 24px 24px 0 0; }
+.modal-header-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(20,30,31,0.85), transparent); border-radius: 24px 24px 0 0; }
+.modal-header-content { position: relative; z-index: 1; }
+.modal-header .art-tag  { color: var(--celeste); margin-bottom: 8px; }
+.modal-header-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: white;
+  line-height: 1.25;
+}
+
+/* Close button top-right */
+.modal-close {
+  position: absolute; top: 20px; right: 20px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2;
+  transition: background 0.2s;
+}
+.modal-close:hover { background: rgba(255,255,255,0.25); }
+
+/* Article body content */
+.modal-body { padding: 32px; }
+
+.modal-intro {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink);
+  font-weight: 300;
+  margin-bottom: 24px;
+  border-left: 3px solid var(--sky);
+  padding-left: 18px;
+}
+.modal-section-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 500; color: var(--ink); margin: 24px 0 10px; }
+.modal-p { font-size: 14px; line-height: 1.8; color: var(--slate); margin-bottom: 14px; }
+
+/* Key takeaway highlighted box */
+.modal-highlight { background: var(--ice); border: 0.5px solid var(--border2); border-radius: 12px; padding: 18px 22px; margin: 20px 0; }
+.modal-highlight-text { font-size: 13px; line-height: 1.7; color: var(--ocean); font-style: italic; }
+
+/* Affiliate CTA footer inside the modal */
+.modal-footer { margin-top: 28px; padding-top: 20px; border-top: 0.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.modal-footer-text { font-size: 12px; color: var(--slate); }
+.modal-aff { font-size: 12px; font-weight: 500; padding: 9px 20px; border-radius: 999px; background: var(--ocean); color: white; cursor: pointer; transition: background 0.2s; }
+.modal-aff:hover { background: var(--ink); }
+
+
+/* ── SCROLL REVEAL ANIMATIONS ───────────────────────────────
+   Elements with .reveal start invisible and slide up into view
+   when they enter the viewport (handled by IntersectionObserver
+   in the JS). Delay classes stagger multiple elements.
+   ---------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Stagger delays for sequential reveals */
+.rd1 { transition-delay: 0.08s; }
+.rd2 { transition-delay: 0.16s; }
+.rd3 { transition-delay: 0.24s; }
+.rd4 { transition-delay: 0.32s; }
+.rd5 { transition-delay: 0.40s; }
+
+
+/* ── RESPONSIVE / MOBILE ────────────────────────────────────
+   Breakpoints for tablet (≤900px) and mobile (≤600px).
+   Most grids collapse to a single column on small screens.
+   ---------------------------------------------------------- */
+@media (max-width: 900px) {
+  .container { padding: 0 20px; }
+
+  /* Collapse two-column layouts to single column */
+  .hero-inner,
+  .featured-grid,
+  .nl-inner,
+  .about-inner,
+  .section-head-split,
+  .shop-intro {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* Hide floating hero cards — too small to be useful */
+  .hero-right { display: none; }
+
+  /* Two columns on tablet for article and shop grids */
+  .articles-grid, .shop-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Footer collapses to 2 columns */
+  .footer-top { grid-template-columns: 1fr 1fr; }
+
+  /* Hide topic nav pills — space-constrained on tablet */
+  .nav-topics { display: none; }
+}
+
+@media (max-width: 600px) {
+  /* Single column on mobile for all grids */
+  .articles-grid, .shop-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+}
+</style>  
 </head>
 <body>
  
