@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>virey. — curated discoveries for a better life</title>
+  <title>virey.</title>
  
   <!-- Google Fonts: Playfair Display (headings) + DM Sans (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,14 +16,14 @@
 <body>
  
  
-  <!-- ═══════════════════════════════════════════════════════
+  <!-- 
        NAVIGATION
        Fixed top bar. Contains:
        - Brand logo (virey.)
        - Topic filter pills (All / Move / Eat / Glow / Explore / Grow)
        - Shop icon link + Subscribe free button
        Clicking a topic pill calls filterTopic() in the JS below.
-       ═══════════════════════════════════════════════════════ -->
+ -->
   <nav class="nav">
     <div class="container nav-inner">
  
@@ -57,13 +57,13 @@
   </nav>
  
  
-  <!-- ═══════════════════════════════════════════════════════
+  <!-- 
        HERO SECTION
        Full-height opening section with:
        - Left: eyebrow label, main headline, subtitle, CTA buttons
        - Right: 4 floating mini content preview cards
        Decorative blurred blobs sit behind the content.
-       ═══════════════════════════════════════════════════════ -->
+        -->
   <section class="hero">
  
     <!-- Decorative background blobs (pointer-events:none in CSS) -->
@@ -139,13 +139,13 @@
   </section><!-- /hero -->
  
  
-  <!-- ═══════════════════════════════════════════════════════
+  <!-- 
        TICKER / MARQUEE STRIP
        Continuously scrolling row of topic keywords between
        the hero and the featured articles section.
        Items are duplicated to create a seamless infinite loop
        — the CSS animates translateX(-50%) so it loops perfectly.
-       ═══════════════════════════════════════════════════════ -->
+        -->
   <div class="ticker">
     <div class="ticker-track">
       <!-- First set of items -->
@@ -192,13 +192,13 @@
   </div><!-- /ticker -->
  
  
-  <!-- ═══════════════════════════════════════════════════════
+  <!-- 
        FEATURED ARTICLES SECTION
        "What virey is reading right now" — editorial layout:
        - One large hero article card on the left
        - Three smaller article cards stacked on the right
        Clicking any card opens the full article modal.
-       ═══════════════════════════════════════════════════════ -->
+        -->
   <section class="section" id="featured">
     <div class="container">
  
@@ -264,13 +264,13 @@
   </section><!-- /featured -->
  
  
-  <!-- ═══════════════════════════════════════════════════════
+  <!-- 
        TOPICS / BROWSE BY SECTION
        Filter buttons let readers browse by topic.
        Clicking a button calls filterTopic() which shows/hides
        cards based on their data-topic attribute.
        Order: All → Move → Eat → Glow → Explore → Grow
-       ═══════════════════════════════════════════════════════ -->
+        -->
   <section class="section section-alt" id="topics">
     <div class="container">
  
@@ -401,12 +401,12 @@
   </section><!-- /topics -->
  
  
-  <!-- ═══════════════════════════════════════════════════════
+  <!-- 
        SHOP / STOREFRONT SECTION
        Digital guides for purchase + trusted affiliate brands.
        openShop() connects to Gumroad or Stan Store.
        Replace the alert() calls with real product URLs.
-       ═══════════════════════════════════════════════════════ -->
+        -->
   <section class="section" id="shop">
     <div class="container">
  
@@ -516,14 +516,14 @@
   </section><!-- /shop -->
  
  
-  <!-- ═══════════════════════════════════════════════════════
+  <!-- 
        NEWSLETTER SECTION
        Dark background with:
        - Left: description, benefit bullets, last issue preview
        - Right: email signup form (calls subscribeNewsletter())
        Connect the form to a real email provider (Mailchimp,
        Substack, Kit etc.) by replacing subscribeNewsletter().
-       ═══════════════════════════════════════════════════════ -->
+        -->
   <section class="newsletter" id="newsletter">
     <div class="container">
       <div class="nl-inner">
@@ -565,12 +565,12 @@
   </section><!-- /newsletter -->
  
  
-  <!-- ═══════════════════════════════════════════════════════
+  <!-- 
        ABOUT SECTION
        Two-column layout:
        - Left: decorative "v." monogram box
        - Right: brand description + social platform links
-       ═══════════════════════════════════════════════════════ -->
+        -->
   <section class="about-strip" id="about">
     <div class="container">
       <div class="about-inner">
@@ -603,7 +603,7 @@
   </section><!-- /about -->
  
  
-  <!-- ═══════════════════════════════════════════════════════
+  <!-- 
        FOOTER
        Dark background with four columns:
        1. Brand name + description + social icons
@@ -611,7 +611,7 @@
        3. Shop guide links
        4. Site links (About, Newsletter, Contact, Privacy)
        Bottom bar: copyright + legal links
-       ═══════════════════════════════════════════════════════ -->
+       -->
   <footer>
     <div class="container">
       <div class="footer-top">
@@ -678,14 +678,14 @@
   </footer><!-- /footer -->
  
  
-  <!-- ═══════════════════════════════════════════════════════
+  <!-- 
        ARTICLE MODAL
        Hidden by default (opacity:0, pointer-events:none).
        Opens when any article card is clicked via openModal().
        Contains a dynamic header (colour changes per topic)
        and scrollable body with article content.
        Closes on: ✕ button, click outside, or Escape key.
-       ═══════════════════════════════════════════════════════ -->
+       -->
   <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
     <div class="modal" id="modal">
  
@@ -707,7 +707,7 @@
   </div><!-- /modal -->
  
  
-  <!-- ═══════════════════════════════════════════════════════
+  <!-- 
        JAVASCRIPT
        All interactive behaviour in one <script> block:
  
@@ -719,7 +719,7 @@
        6. filterTopic()   — shows/hides article cards by topic
        7. subscribeNewsletter() — handles newsletter form submission
        8. IntersectionObserver — triggers .reveal scroll animations
-       ═══════════════════════════════════════════════════════ -->
+       -->
   <script>
  
     /* ── 1. ARTICLE DATABASE ────────────────────────────────
